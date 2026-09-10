@@ -1,6 +1,6 @@
 /*
- * Noise Pollution -- live particle render driven by Pure Data audio analysis.
- * Receives plain UDP text from pd/noise_pollution.pd on port 12000, e.g.:
+ * Particle Smog -- live particle render driven by Pure Data audio analysis.
+ * Receives plain UDP text from pd/particle_smog.pd on port 12000, e.g.:
  *   "volume 0.42"
  *   "pitch 220.5"
  * Volume drives particle count/speed/size/saturation, pitch drives hue.

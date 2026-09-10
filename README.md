@@ -1,4 +1,4 @@
-# Noise Pollution — a live sound-to-particle painting
+# Particle Smog — a live sound-to-particle painting
 
 An awareness piece: the room's ambient sound is captured, analyzed, and
 rendered as a live particle swarm. **Pitch sets the hue, volume sets how
@@ -13,7 +13,7 @@ Nothing accumulates; it's a live meter, not an archive.
  microphone
      |
      v
- Pure Data (pd/noise_pollution.pd)
+ Pure Data (pd/particle_smog.pd)
      |  env~        -> volume (0-1, normalized RMS)
      |  fiddle~     -> pitch (MIDI, raw, continuous) -> mtof -> Hz
      v
@@ -21,7 +21,7 @@ Nothing accumulates; it's a live meter, not an archive.
      |  "volume 0.42"
      |  "pitch 220.5"
      v
- Processing (processing/NoisePollution/)
+ Processing (processing/ParticleSmog/)
      -> particle swarm: hue = f(pitch), density/speed/size = f(volume)
 ```
 
@@ -51,14 +51,14 @@ Requires [Pd](https://puredata.info/downloads) and
 [Processing](https://processing.org/download) installed — both free,
 no other dependencies or libraries needed.
 
-1. **Start Pure Data first**: open `pd/noise_pollution.pd`.
+1. **Start Pure Data first**: open `pd/particle_smog.pd`.
    - Enable audio: menu → *Media → DSP On* (or ⌘/Ctrl+/).
    - On macOS, grant Pd microphone access if prompted (System Settings →
      Privacy & Security → Microphone).
    - It streams to `localhost:12000` automatically on load.
 
 2. **Then start Processing**: open
-   `processing/NoisePollution/NoisePollution.pde` and press Run. Press
+   `processing/ParticleSmog/ParticleSmog.pde` and press Run. Press
    `h` in the sketch window to toggle the on-screen pitch/volume readout.
 
 Pd must be running (with DSP on) before or as Processing starts, so a
@@ -96,10 +96,10 @@ replacement for `fiddle~`), so it isn't included here.
 
 ## Tuning
 
-- `pd/noise_pollution.pd`: `+ 60 / 60` normalizes `env~`'s dB output
+- `pd/particle_smog.pd`: `+ 60 / 60` normalizes `env~`'s dB output
   assuming ambient levels roughly -60 dB to 0 dB; adjust the `60` to
   taste for your mic's gain/sensitivity.
-- `NoisePollution.pde`: `MIN_FREQ`/`MAX_FREQ`/`HUE_RANGE` for the color
+- `ParticleSmog.pde`: `MIN_FREQ`/`MAX_FREQ`/`HUE_RANGE` for the color
   mapping, `ALERT_VOLUME` for the warning threshold, and the `map(...)`
   calls in `Particle`'s constructor for how aggressively volume affects
   particle count/speed/size.

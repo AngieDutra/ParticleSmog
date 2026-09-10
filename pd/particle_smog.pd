@@ -13,7 +13,7 @@
 #X msg 40 390 connect localhost 12000;
 #X obj 40 310 loadbang;
 #X obj 40 350 del 500;
-#X text 40 10 NOISE POLLUTION -- audio analysis (Pd);
+#X text 40 10 PARTICLE SMOG -- audio analysis (Pd);
 #X text 40 480 1. Turn on DSP (ctrl or cmd plus slash) before use.;
 #X text 40 500 2. Uses only vanilla Pd objects -- no externals required.;
 #X text 40 520 3. Sends volume and pitch as plain UDP text messages to localhost port 12000.;
