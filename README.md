@@ -34,21 +34,37 @@ your Pd version/CPU architecture, which is exactly what happened during
 development of this piece — so the pipeline was simplified to plain UDP
 text instead of binary OSC to guarantee it works anywhere.
 
-## Setup
+## Technologies used
 
-1. **Pure Data**: open `pd/noise_pollution.pd`.
+- **[Pure Data (Pd)](https://puredata.info/)** (vanilla, no externals) —
+  microphone capture and audio analysis: `env~` for volume, `fiddle~` +
+  `mtof` for pitch, `netsend` to stream results out over UDP.
+- **[Processing](https://processing.org/)** (Java-based, core library
+  only) — receives the UDP stream via `java.net.DatagramSocket` and
+  renders the live particle swarm.
+- Plain **UDP text** as the wire protocol between the two (no OSC
+  library on either side — see *Architecture* above for why).
+
+## Run it locally
+
+Requires [Pd](https://puredata.info/downloads) and
+[Processing](https://processing.org/download) installed — both free,
+no other dependencies or libraries needed.
+
+1. **Start Pure Data first**: open `pd/noise_pollution.pd`.
    - Enable audio: menu → *Media → DSP On* (or ⌘/Ctrl+/).
    - On macOS, grant Pd microphone access if prompted (System Settings →
      Privacy & Security → Microphone).
-   - It streams to `localhost:12000` automatically on load — nothing to
-     install.
+   - It streams to `localhost:12000` automatically on load.
 
-2. **Processing**: open `processing/NoisePollution/NoisePollution.pde`
-   and run it. Press `h` to toggle the on-screen pitch/volume readout.
-   No libraries to install.
+2. **Then start Processing**: open
+   `processing/NoisePollution/NoisePollution.pde` and press Run. Press
+   `h` in the sketch window to toggle the on-screen pitch/volume readout.
 
-Run Pd first (or at least before you expect visuals) so a sender is live
-when Processing's socket starts listening on port 12000.
+Pd must be running (with DSP on) before or as Processing starts, so a
+sender is live when Processing's socket starts listening on port 12000
+— if you start Processing first, it just sits idle at 0/0 until Pd
+comes online.
 
 ## Mapping design
 
